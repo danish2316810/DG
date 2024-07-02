@@ -1,0 +1,170 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "dgdispodm",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.13.6",
+      "toolsId": "68b667e6-ca8e-4dec-aa3e-d11464f511da"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/dangerousgoods/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "fullWidth": true,
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "dgdispodm.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "groupProperties": {
+            "createGrp": {
+              "submit": "API"
+            },
+            "UpdateGroup": {
+              "submit": "API"
+            }
+          }
+        }
+      },
+      "localModel": {
+        "type": "sap.ui.model.json.JSONModel"
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "dgdispodm.ext.controller.ListReport"
+          }
+        }
+      }
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "DecisionMatrixSetList",
+          "target": "DecisionMatrixSetList"
+        }
+      ],
+      "targets": {
+        "DecisionMatrixSetList": {
+          "type": "Component",
+          "id": "DecisionMatrixSetList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "enhanceI18n": "i18n/i18n.properties",
+              "hideFilterBar": true,
+              "contextPath": "/DecisionMatrixSet",
+              "variantManagement": "None",
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "createMode": "inline",
+                    "type": "GridTable",
+                    "selectionMode": "Single",
+                    "inlineDelete": true,
+                    "multiSelect": false,
+                    "selectAll": false,
+                    "widthIncludingColumnHeader": true,
+                    "personalization": {
+                      "column": true,
+                      "sort": true,
+                      "filter": true
+                    }
+                  },
+                  "actions": {
+                    "create": {
+                      "press": ".extension.dgdispodm.ext.controller.ListReport.onCreate",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Create"
+                    },
+                    "Edit": {
+                      "press": ".extension.dgdispodm.ext.controller.ListReport.onEdit",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "Edit"
+                    }
+                  }
+                }
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

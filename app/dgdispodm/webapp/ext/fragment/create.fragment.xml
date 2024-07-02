@@ -1,0 +1,61 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:m="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table">
+    <Dialog title="{i18n>dmaxTable}">
+        <buttons>
+            <Button text="{i18n>save}" press="oncreatesave" type="Emphasized"/>
+            <Button text="{i18n>cancel}" press="oncreatecancel" type="Emphasized"/>
+        </buttons>
+        <t:Table id="idUiTable" rows="{localModel>/createData}">
+            <t:extension>
+                <Toolbar>
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button id="idAddBtn" icon="sap-icon://add" press="onRowAdd"/>
+                    <Button icon="sap-icon://delete" press="onRowDelete"/>
+                </Toolbar>
+            </t:extension>
+            <t:columns>
+                <t:Column label="{i18n>MaterialIsReclam}" visible="{localModel>/editMode/reclamation}">
+                    <t:template>
+                        <ComboBox change="onMatLeaking" items="{localModel>/yesno}" value="{localModel>MaterialIsReclam}">
+                            <core:Item text="{localModel>decision}" key="{localModel>decision}"></core:Item>
+                        </ComboBox>
+                    </t:template>
+                </t:Column>
+                <t:Column label="{i18n>MaterialIsLeak}" visible="{localModel>/editMode/matLeak}">
+                    <t:template>
+                        <ComboBox change="onMatLeaking" items="{localModel>/yesno}" value="{localModel>MaterialIsLeak}">
+                            <core:Item text="{localModel>decision}" key="{localModel>decision}"></core:Item>
+                        </ComboBox>
+                    </t:template>
+                </t:Column>
+                <t:Column label="{i18n>MaterialIsHaz}" visible="{localModel>/editMode/matHaz}">
+                    <t:template>
+                        <ComboBox change="onMatLeaking" items="{localModel>/yesno}" value="{localModel>MaterialIsHaz}">
+                            <core:Item text="{localModel>decision}" key="{localModel>decision}"></core:Item>
+                        </ComboBox>
+                    </t:template>
+                </t:Column>
+                <t:Column label="{i18n>HazType}">
+                    <t:template>
+                        <Input value="{localModel>HazType}"></Input>
+                    </t:template>
+                </t:Column>
+                <t:Column label="{i18n>Container}">
+                    <t:template>
+                        <Input value="{localModel>Container}"></Input>
+                    </t:template>
+                </t:Column>
+                <t:Column label="{i18n>IsContainerRequired}">
+                    <t:template>
+                        <ComboBox change="onMatLeaking" items="{localModel>/scanReq}" value="{localModel>IsContainerRequired}">
+                            <core:Item text="{localModel>decision}" key="{localModel>decision}"></core:Item>
+                        </ComboBox>
+                    </t:template>
+                </t:Column>
+            </t:columns>
+        </t:Table>
+    </Dialog>
+</core:FragmentDefinition>
